@@ -11,7 +11,9 @@ export default function RootLayout({ children }) {
     <html lang='en'>
       <body>
         <ThemeRegistry options={{ key: 'mui' }}>
-          <SessionAuthProvider>{children}</SessionAuthProvider>
+          <SessionAuthProvider>
+            <main style={{height:'100vh'}}>{children}</main>
+          </SessionAuthProvider>
         </ThemeRegistry>
       </body>
     </html>

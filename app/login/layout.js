@@ -13,7 +13,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <Grid container component='main' sx={{ height: '100vh' }}>
+    <Grid container sx={{height:'100%'}}>
       <Grid
         item
         xs={false}

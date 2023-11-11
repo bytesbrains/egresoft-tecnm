@@ -10,19 +10,18 @@ import { useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react'
 import { useState } from 'react'
 
-export default function LoginForm() {
+export default function LoginForm({ role }) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
-  const [success, setSuccess] = useState(false)
   const router = useRouter()
 
   const handleSubmit = async (event) => {
     event.preventDefault()
     setLoading(true)
 
-    const responseNextAuth = await signIn('credentials', {
+    const responseNextAuth = await signIn(role, {
       username,
       password,
       redirect: false
@@ -35,12 +34,7 @@ export default function LoginForm() {
       return
     }
 
-    setSuccess(true)
-    setLoading(false)
-
-    setTimeout(()=>{
-      router.push('/dashboard')
-    },1000)
+    router.push(`/${role}/dashboard`)
   }
 
   return (
@@ -85,12 +79,15 @@ export default function LoginForm() {
           variant='contained'
           sx={{ mt: 3, mb: 2 }}
           disabled={loading}
-          color={success ? 'success' : 'primary'}
         >
           {!loading ? 'Ingresar' : 'Ingresando...'}
         </Button>
         {!loading && error && (
-          <Typography color='error' variant='h6'  sx={{fontWeight: 'bold',textAlign:'center'}}>
+          <Typography
+            color='error'
+            variant='h6'
+            sx={{ fontWeight: 'bold', textAlign: 'center' }}
+          >
             Datos erroneos
           </Typography>
         )}
