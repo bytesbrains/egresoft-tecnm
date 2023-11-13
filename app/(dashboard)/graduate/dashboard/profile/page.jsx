@@ -1,6 +1,7 @@
 
 export default function Profile(){
+
   return(
-    <p>Ola profile</p>
+  <h1>hello</h1>    
   )
 }
