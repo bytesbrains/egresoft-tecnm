@@ -9,7 +9,7 @@ export default withAuth({
         if(req.nextUrl.pathname.startsWith('/graduate')){
           return token?.role === 'graduate'
         }
-        return false
+        return true 
       },
     },
   })
