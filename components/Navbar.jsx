@@ -36,13 +36,13 @@ export default function Navbar({ open, handleDrawerOpen, children }) {
           alignItems: 'center',
           justifyContent: {
             xs: 'space-between',
-            lg: 'flex-start'
+            sm: 'flex-start'
           },
           width:{
-            xs:'60%',
-            sm:'55%',
+            xs:'57%',
             md:'100%'
-          }
+          },
+          pr:'0px'
         }}
       >
         <IconButton

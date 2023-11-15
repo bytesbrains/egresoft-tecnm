@@ -7,7 +7,6 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import Box from '@mui/material/Box'
 import Divider from '@mui/material/Divider'
-import { Typography } from '@mui/material'
 
 const drawerWidth = 240
 
@@ -24,23 +23,23 @@ export default function SideBar({ open, handleDrawerClose, children }) {
   const theme = useTheme()
 
   return (
-    <Drawer
-      sx={{
-        width: drawerWidth,
-        flexShrink: 0,
-        '& .MuiDrawer-paper': {
+      <Drawer
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          '& .MuiDrawer-paper': {
           width: drawerWidth,
           boxSizing: 'border-box',
           backgroundColor: 'primary.main',
           color: '#fff',
           height: '100%',
-          position: 'relative',
+          position: 'fixed',
         }
-      }}
-      variant='persistent'
-      anchor='left'
-      open={open}
-    >
+        }}
+        variant="persistent"
+        anchor="left"
+        open={open}
+      >
       <Box>
         <DrawerHeader>
           <IconButton sx={{ color: 'inherit' }} onClick={handleDrawerClose}>

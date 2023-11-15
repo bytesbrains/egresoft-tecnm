@@ -3,7 +3,7 @@
 import SideBar from '@/components/SideBar'
 import Box from '@mui/material/Box'
 import MainContent from '@/components/MainContent'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Navbar from '@/components/Navbar'
 import { DrawerHeader } from '@/components/SideBar'
 import EmailIcon from '@mui/icons-material/Email'
@@ -53,8 +53,13 @@ const navigation = [
 ]
 
 export default function RootLayout({ children }) {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState()
   const pathname = usePathname()
+  
+  useEffect(() => {
+    const viewport = window.innerWidth > 600
+    setOpen(()=>viewport)
+}, [])
 
   const handleDrawerOpen = () => {
     setOpen(true)
@@ -66,7 +71,7 @@ export default function RootLayout({ children }) {
 
   return (
     <Box
-      sx={{ display: 'flex', backgroundColor: '#fafeff', height: '100%' }}
+      sx={{ display: 'flex', backgroundColor: '#fafcfc', maxHeight: '100%' }}
       component='section'
     >
       <Navbar open={open} handleDrawerOpen={handleDrawerOpen}>

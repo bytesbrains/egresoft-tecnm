@@ -1,22 +1,15 @@
 'use client'
 
-import { useState } from 'react'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import Box from '@mui/material/Box'
 
-export default function MailboxTab() {
-  const [value, setValue] = useState('Inicio')
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue)
-  }
-
+export default function MailboxTab({currentTab, handleTab}) {
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{ width: '100%'}}>
       <Tabs
-        value={value}
-        onChange={handleChange}
+        value={currentTab}
+        onChange={handleTab}
         textColor='secondary'
         indicatorColor='secondary'
         aria-label='tabs'
