@@ -18,7 +18,7 @@ const handler = NextAuth({
 
         const token = await fetch(
           `
-        ${process.env.NEXT_PUBLIC_BACKEND_URL}/users/login`,
+        ${process.env.NEXT_PUBLIC_BACKEND_URL}/users/login/admin`,
           {
             method: 'POST',
             body: formData
@@ -27,7 +27,7 @@ const handler = NextAuth({
 
         const userToken = await token.json()
 
-        const res = await fetch('http://127.0.0.1:8000/users/me', {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/users/me/admin`, {
           method: 'GET',
           headers: { Authorization: `Bearer ${userToken.access_token}` }
         })
@@ -54,7 +54,7 @@ const handler = NextAuth({
 
         const token = await fetch(
           `
-        ${process.env.NEXT_PUBLIC_BACKEND_URL}/users/login`,
+        ${process.env.NEXT_PUBLIC_BACKEND_URL}/users/login/graduate`,
           {
             method: 'POST',
             body: formData
@@ -63,7 +63,7 @@ const handler = NextAuth({
 
         const userToken = await token.json()
 
-        const res = await fetch('http://127.0.0.1:8000/users/me', {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/users/me/graduate`, {
           method: 'GET',
           headers: { Authorization: `Bearer ${userToken.access_token}` }
         })

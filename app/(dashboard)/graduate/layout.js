@@ -27,11 +27,11 @@ const URL = {
   'Historial': '/graduate/dashboard/history'
 }
 
-const UrlHeader = {
-  '/graduate/dashboard': 'Inicio',
-  '/graduate/dashboard/profile': 'Perfil',
-  '/graduate/dashboard/mailbox': 'Buzon',
-  '/graduate/dashboard/history': 'Historial'
+const urlHeader = {
+  'dashboard': 'Inicio',
+  'profile': 'Perfil',
+  'mailbox': 'Buzón',
+  'history': 'Historial',
 }
 
 const navigation = [
@@ -55,6 +55,7 @@ const navigation = [
 export default function RootLayout({ children }) {
   const [open, setOpen] = useState()
   const pathname = usePathname()
+  const pagename = pathname.split('/').pop();
   
   useEffect(() => {
     const viewport = window.innerWidth > 600
@@ -71,11 +72,11 @@ export default function RootLayout({ children }) {
 
   return (
     <Box
-      sx={{ display: 'flex', backgroundColor: '#fafcfc', maxHeight: '100%' }}
+      sx={{ display: 'flex', backgroundColor: '#f5f5f5', minHeight: '100%' }}
       component='section'
     >
       <Navbar open={open} handleDrawerOpen={handleDrawerOpen}>
-        {UrlHeader[pathname]}
+        {urlHeader[pagename] ? urlHeader[pagename] : 'Encuesta'}
       </Navbar>
       <SideBar open={open} handleDrawerClose={handleDrawerClose}>
         <List>
