@@ -2,7 +2,7 @@ export const themeJson = {
     "cssVariables": {
         "--sjs-general-backcolor": "rgba(255, 255, 255, 1)",
         "--sjs-general-backcolor-dark": "rgba(248, 248, 248, 1)",
-        "--sjs-general-backcolor-dim": "#E2EBF6",
+        "--sjs-general-backcolor-dim": "rgba(255, 255, 255, 0)",
         "--sjs-general-backcolor-dim-light": "rgba(249, 249, 249, 1)",
         "--sjs-general-backcolor-dim-dark": "rgba(243, 243, 243, 1)",
         "--sjs-general-forecolor": "rgba(0, 0, 0, 0.91)",
@@ -90,7 +90,7 @@ export const themeJson = {
     "colorPalette": "light",
     "isPanelless": false,
     "header": {
-        "height": 320,
+        "height": 200,
         "textAreaWidth": 480,    
         "backgroundImage": "https://api.surveyjs.io/private/Surveys/files?name=b64cab40-6d94-420e-a5b8-67a4dae7be9b",
         "backgroundImageOpacity": 0.25,

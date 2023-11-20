@@ -10,7 +10,7 @@
         {
           "type": "text",
           "name": "username",
-          "title": "Username",
+          "title": "Hola mundo travieso",
           "maxLength": 25
         },
         {
@@ -55,7 +55,7 @@
       ]
     }
   ],
-  "showQuestionNumbers": "off",
+  "showQuestionNumbers": "on",
   "questionDescriptionLocation": "underInput",
   "questionErrorLocation": "bottom",
   "completeText": "Submit",
