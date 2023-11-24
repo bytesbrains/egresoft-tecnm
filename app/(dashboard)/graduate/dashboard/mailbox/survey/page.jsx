@@ -8,7 +8,9 @@ import { themeJson } from '@/utils/survey-theme'
 
 const fetchSurvey = async () => {
   try {
-    const response = await fetch('http://localhost:3000/data.json')
+    const response = await fetch('http://localhost:3000/data.json', {
+      next: { revalidate: 0 }
+    })
     const data = await response.json()
     return data
   } catch (e) {
