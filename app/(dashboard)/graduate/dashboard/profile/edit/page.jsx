@@ -9,21 +9,12 @@ import GeneralProfileEditable from '@/components/GeneralProfileEditable'
 import PersonalProfileEditable from '@/components/PersonalProfileEditable'
 import AcademicProfileEditable from '@/components/AcademicProfileEditable'
 import EditAvatar from '@/components/EditAvatar'
+import { data } from '@/public/profile'
 
 const USER = 'profile.json'
 
 const fetchUserData = async (USER) => {
-  try {
-    const response = await fetch(`${process.env.VERCEL_URL}/${USER}`, {
-      cache: 'no-store'
-    })
-    const data = await response.json()
-
-    return data
-  } catch (e) {
-    console.error(e)
-    return
-  }
+  return data
 }
 
 export default async function EditProfile() {
