@@ -48,7 +48,7 @@ const navigation = [
 export default function RootLayout({ children }) {
   const [open, setOpen] = useState()
   const pathname = usePathname()
-  const pagename = pathname.match(/\/dashboard\/([^/]+)/)[1]
+  const pagename = pathname.match(/\/dashboard\/([^/]+)/)
 
   useEffect(() => {
     const viewport = window.innerWidth > 600
@@ -69,7 +69,7 @@ export default function RootLayout({ children }) {
       component='section'
     >
       <Navbar open={open} handleDrawerOpen={handleDrawerOpen}>
-        {pagename}
+        {pagename ? pagename[1] : 'Inicio'}
       </Navbar>
       <SideBar open={open} handleDrawerClose={handleDrawerClose}>
         <List>
