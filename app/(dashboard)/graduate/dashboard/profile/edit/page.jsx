@@ -14,7 +14,7 @@ const USER = 'profile.json'
 
 const fetchUserData = async (USER) => {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_APP_API}/${USER}`, {
+    const response = await fetch(`${process.env.VERCEL_URL}/${USER}`, {
       cache: 'no-store'
     })
     const data = await response.json()

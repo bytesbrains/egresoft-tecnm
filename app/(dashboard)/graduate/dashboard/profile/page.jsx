@@ -13,7 +13,7 @@ const USER = 'profile.json'
 
 const fetchUserData = async (USER) => {
   try {
-    const response = await fetch(`/${USER}`, {
+    const response = await fetch(`${process.env.VERCEL_URL}/${USER}`, {
       cache: 'no-store'
     })
     const data = await response.json()
