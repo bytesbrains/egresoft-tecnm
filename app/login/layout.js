@@ -47,12 +47,14 @@ export default function RootLayout({ children }) {
       >
         <Box
           sx={{
-            my: 8,
-            mx: 4,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            justifyContent: 'center'
+            justifyContent: 'center',
+            width:{
+              xs:'90%',
+              md:'70%'
+            }
           }}
         >
           <Box sx={{display:{

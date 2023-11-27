@@ -38,11 +38,11 @@ export default function Navbar({ open, handleDrawerOpen, children }) {
             xs: 'space-between',
             sm: 'flex-start'
           },
-          width:{
-            xs:'57%',
-            md:'100%'
+          width: {
+            xs: '57%',
+            md: '100%'
           },
-          pr:'0px'
+          pr: '0px'
         }}
       >
         <IconButton
@@ -56,6 +56,7 @@ export default function Navbar({ open, handleDrawerOpen, children }) {
         </IconButton>
         <Typography
           sx={{
+            textTransform: 'capitalize',
             xs: {
               textAlign: 'center'
             }

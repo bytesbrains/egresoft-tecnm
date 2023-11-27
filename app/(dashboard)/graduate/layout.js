@@ -16,22 +16,15 @@ import ListItemText from '@mui/material/ListItemText'
 import HistoryIcon from '@mui/icons-material/History'
 import ListFooter from '@/components/ListFooter'
 import Link from 'next/link'
-import LogoutButton from '@/components/LogoutButton';
-import SettingButtons from '@/components/SettingButton';
+import LogoutButton from '@/components/LogoutButton'
+import SettingButtons from '@/components/SettingButton'
 import { usePathname } from 'next/navigation'
 
 const URL = {
-  'Inicio': '/graduate/dashboard',
-  'Perfil': '/graduate/dashboard/profile',
-  'Buzon': '/graduate/dashboard/mailbox',
-  'Historial': '/graduate/dashboard/history'
-}
-
-const UrlHeader = {
-  '/graduate/dashboard': 'Inicio',
-  '/graduate/dashboard/profile': 'Perfil',
-  '/graduate/dashboard/mailbox': 'Buzon',
-  '/graduate/dashboard/history': 'Historial'
+  Inicio: '/graduate/dashboard',
+  Perfil: '/graduate/dashboard/profile',
+  Buzon: '/graduate/dashboard/mailbox',
+  Historial: '/graduate/dashboard/history'
 }
 
 const navigation = [
@@ -55,11 +48,12 @@ const navigation = [
 export default function RootLayout({ children }) {
   const [open, setOpen] = useState()
   const pathname = usePathname()
-  
+  const pagename = pathname.match(/\/dashboard\/([^/]+)/)[1]
+
   useEffect(() => {
     const viewport = window.innerWidth > 600
-    setOpen(()=>viewport)
-}, [])
+    setOpen(() => viewport)
+  }, [])
 
   const handleDrawerOpen = () => {
     setOpen(true)
@@ -71,45 +65,49 @@ export default function RootLayout({ children }) {
 
   return (
     <Box
-      sx={{ display: 'flex', backgroundColor: '#fafcfc', maxHeight: '100%' }}
+      sx={{ display: 'flex', backgroundColor: '#f5f5f5', minHeight: '100%' }}
       component='section'
     >
       <Navbar open={open} handleDrawerOpen={handleDrawerOpen}>
-        {UrlHeader[pathname]}
+        {pagename}
       </Navbar>
       <SideBar open={open} handleDrawerClose={handleDrawerClose}>
         <List>
           {navigation.map((item) => (
-            <Link key={item.text}  style={{
-              textDecoration: 'none',
-              color:'#fff',
-            }} href={item.href}>
+            <Link
+              key={item.text}
+              style={{
+                textDecoration: 'none',
+                color: '#fff'
+              }}
+              href={item.href}
+            >
               <ListItem disablePadding>
-              <ListItemButton
-                sx={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '10px',
-                  justifyContent: 'center',
-                  '&:hover': {
-                    backgroundColor: 'rgba(255, 255, 255, 0.10)'
-                  }
-                }}
-              >
-                <ListItemIcon
-                  sx={{ display: 'flex', minWidth: '25px', color: 'inherit' }}
+                <ListItemButton
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    justifyContent: 'center',
+                    '&:hover': {
+                      backgroundColor: 'rgba(255, 255, 255, 0.10)'
+                    }
+                  }}
                 >
-                  {item.icon}
-                </ListItemIcon>
-                <ListItemText primary={item.text} />
-              </ListItemButton>
-            </ListItem>
+                  <ListItemIcon
+                    sx={{ display: 'flex', minWidth: '25px', color: 'inherit' }}
+                  >
+                    {item.icon}
+                  </ListItemIcon>
+                  <ListItemText primary={item.text} />
+                </ListItemButton>
+              </ListItem>
             </Link>
           ))}
         </List>
         <ListFooter>
-          <SettingButtons href='/graduate/dashboard/settings'/>
-          <LogoutButton/>
+          <SettingButtons href='/graduate/dashboard/settings' />
+          <LogoutButton />
         </ListFooter>
       </SideBar>
       <MainContent open={open}>

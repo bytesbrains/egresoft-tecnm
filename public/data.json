@@ -1,0 +1,64 @@
+{
+  "title": "Encuesta de calidad",
+  "description": "Esta encuesta fue creada para evaluar la calidad de tu instituto de egreso",
+  "pages": [
+    {
+      "name": "page1",
+      "elements": [
+        {
+          "type": "text",
+          "name": "username",
+          "title": "Hola mundo travieso",
+          "maxLength": 25
+        },
+        {
+          "type": "text",
+          "name": "email",
+          "title": "E-mail address",
+          "isRequired": true,
+          "inputType": "email",
+          "autocomplete": "email",
+          "placeholder": "foobar@example.com"
+        },
+        {
+          "type": "text",
+          "name": "password",
+          "title": "Password",
+          "description": "Enter 8 characters minimum.",
+          "isRequired": true,
+          "validators": [
+            {
+              "type": "text",
+              "text": "Your password must be at least 8 characters long.",
+              "minLength": 8
+            }
+          ],
+          "inputType": "password",
+          "autocomplete": "password"
+        },
+        {
+          "type": "text",
+          "name": "url",
+          "title": "URL",
+          "validators": [
+            {
+              "type": "regex",
+              "text": "Your answer must match the URL pattern.",
+              "regex": "https://.*"
+            }
+          ],
+          "inputType": "url",
+          "placeholder": "https://www.example.com"
+        }
+      ]
+    }
+  ],
+  "showQuestionNumbers": "on",
+  "questionDescriptionLocation": "underInput",
+  "questionErrorLocation": "bottom",
+  "completeText": "Submit",
+  "widthMode": "static",
+  "width": "720",
+  "fitToContainer": true,
+  "headerView": "advanced"
+}
