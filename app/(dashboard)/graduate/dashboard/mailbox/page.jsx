@@ -3,7 +3,7 @@
 import MailboxTab from '@/components/MailboxTab'
 import SortInput from '@/components/SortInput'
 import Box from '@mui/material/Box'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft'
 import WindowIcon from '@mui/icons-material/Window'
 import Divider from '@mui/material/Divider'
@@ -12,62 +12,30 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import Grid from '@mui/material/Grid'
 import Link from 'next/link'
 
-const data = [
-  {
-    id: 1,
-    title: 'Asunto de la encuesta',
-    body: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-  },
-  {
-    id: 2,
-    title: 'Asunto de la encuesta',
-    body: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s."
-  },
-  {
-    id: 3,
-    title: 'Asunto de la encuesta',
-    body: 'When an unknown printer took a galley of type and scrambled it to make a type specimen book.'
-  },
-  {
-    id: 4,
-    title: 'Asunto de la encuesta',
-    body: 'This is a new survey added to the list.'
-  },
-  {
-    id: 5,
-    title: 'Asunto de la encuesta',
-    body: 'Another new survey added for testing purposes.'
-  },
-  {
-    id: 6,
-    title: 'Asunto de la encuesta',
-    body: 'Adding yet another survey for completeness.'
-  },
-  {
-    id: 7,
-    title: 'Asunto de la encuesta',
-    body: 'A new survey for further testing purposes.'
-  },
-  {
-    id: 8,
-    title: 'Asunto de la encuesta',
-    body: 'Eighth survey to expand the dataset.'
-  },
-  {
-    id: 9,
-    title: 'Asunto de la encuesta',
-    body: 'Ninth survey for a complete set of data.'
-  },
-  {
-    id: 10,
-    title: 'Asunto de la encuesta',
-    body: 'Tenth survey to reach the desired number.'
+const fetchSurveysList = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/survey/`,
+      {
+        next: { revalidate: 0 }
+      }
+    )
+    const data = await response.json()
+    return data
+  } catch (e) {
+    console.error(e)
   }
-]
+}
 
 export default function Mailbox() {
   const [isGrid, setIsGrid] = useState(false)
+  const [data, setData] = useState([])
   const [currentTab, setCurrentTab] = useState('Inicio')
+
+  useEffect(() => {
+    const getData = async () => setData(await fetchSurveysList())
+    getData()
+  }, [])
 
   const handleGridClick = () => {
     setIsGrid(true)
@@ -161,6 +129,7 @@ export default function Mailbox() {
             sx={{
               display: isGrid ? 'grid' : 'flex',
               gap: '20px',
+              mt: '20px',
               columnGap: isGrid ? '20px' : '0',
               flexDirection: 'row',
               flexWrap: 'wrap',
@@ -173,9 +142,10 @@ export default function Mailbox() {
             {data.map((item) => (
               <Paper
                 elevation={1}
-                key={item.id}
+                key={item.title}
                 sx={{
                   minWidth: isGrid ? '130px' : '100%',
+                  height: 'fit-content',
                   padding: {
                     xs: '8px',
                     md: '16px'
@@ -218,13 +188,13 @@ export default function Mailbox() {
                       }
                     }}
                   >
-                    {item.body}
+                    {item.description}
                   </Typography>
                 </div>
                 <div style={{ marginTop: 'auto', textAlign: 'left' }}>
                   <Link
                     style={{ color: 'white' }}
-                    href='/graduate/dashboard/mailbox/survey'
+                    href={`/graduate/dashboard/mailbox/${item.title}`}
                   >
                     <Button
                       color='secondary'

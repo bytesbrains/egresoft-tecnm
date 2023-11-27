@@ -5,12 +5,16 @@ import { Model } from 'survey-core'
 import { Survey } from 'survey-react-ui'
 import 'survey-core/defaultV2.min.css'
 import { themeJson } from '@/utils/survey-theme'
+import CircularProgressWithLabel from '@/components/CircularProgressWithLabel'
 
-const fetchSurvey = async () => {
+const fetchSurvey = async (survey) => {
   try {
-    const response = await fetch('http://localhost:3000/data.json', {
-      next: { revalidate: 0 }
-    })
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/survey/get/${decodeURI(survey)}`,
+      {
+        next: { revalidate: 0 }
+      }
+    )
     const data = await response.json()
     return data
   } catch (e) {
@@ -18,11 +22,17 @@ const fetchSurvey = async () => {
   }
 }
 
-export default function SurveyComponent() {
+export default function SurveyComponent({ params }) {
   const [json, setJson] = useState({})
+  const [loading, setLoading] = useState(true)
+  const surveyId = params.survey
+  console.log(`${process.env.NEXT_PUBLIC_BACKEND_URL}/survey/get/${surveyId}`)
 
   useEffect(() => {
-    const getData = async () => setJson(await fetchSurvey())
+    const getData = async () => {
+      setJson(await fetchSurvey(surveyId))
+      setLoading(false)
+    }
     getData()
   }, [])
 
@@ -31,7 +41,8 @@ export default function SurveyComponent() {
   survey.onComplete.add((sender, options) => {
     console.log(JSON.stringify(sender.data, null, 3))
   })
-  return <Survey model={survey} />
+
+  return loading ? <CircularProgressWithLabel /> : <Survey model={survey} />
 }
 
 // import { useEffect, useState } from 'react'

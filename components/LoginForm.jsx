@@ -21,11 +21,10 @@ export default function LoginForm({ role }) {
   }
 
   const validationSchema = Yup.object({
-    username: Yup.string().min(
-      6,
-      'El nombre de usuario debe tener al menos 6 caracteres'
+    username: Yup.string('Ingresa tu usuario').required(
+      'El usuario es requerido'
     ),
-    password: Yup.string().required('Ingrese su contraseña')
+    password: Yup.string('Enter your password').required('Password is required')
   })
 
   const handleSubmit = async (values, { setSubmitting }) => {
@@ -51,48 +50,44 @@ export default function LoginForm({ role }) {
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
-      {({ isSubmitting, touched, errors }) => (
+      {({ isSubmitting, handleChange, handleBlur, touched, errors }) => (
         <Form
           style={{ display: 'flex', flexDirection: 'column', width: '100%' }}
         >
-          <Field name='username'>
-            {({ field }) => (
-              <TextField
-                margin='normal'
-                required
-                fullWidth
-                id='username'
-                label='Usuario'
-                name='username'
-                autoComplete='usuario'
-                autoFocus
-                variant='filled'
-                {...field}
-              />
-            )}
-          </Field>
-          {touched.username && errors.username && (
-            <div style={{ marginBottom: '10px' }}>{errors.username}</div>
-          )}
-          <Field name='password'>
-            {({ field }) => (
-              <TextField
-                margin='normal'
-                required
-                fullWidth
-                name='password'
-                label='Contraseña'
-                type='password'
-                id='password'
-                autoComplete='current-password'
-                variant='filled'
-                {...field}
-              />
-            )}
-          </Field>
-          {touched.password && errors.password && (
-            <div style={{ marginBottom: '10px' }}>{errors.password}</div>
-          )}
+          <TextField
+            margin='normal'
+            required
+            fullWidth
+            id='username'
+            label='Usuario'
+            name='username'
+            autoComplete='usuario'
+            autoFocus
+            inputProps={{ style: { fontSize: 25 } }}
+            variant='filled'
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={touched.username && Boolean(errors.username)}
+            helperText={touched.username && errors.username}
+          />
+
+          <TextField
+            margin='normal'
+            required
+            fullWidth
+            name='password'
+            label='Contraseña'
+            type='password'
+            id='password'
+            autoComplete='current-password'
+            inputProps={{ style: { fontSize: 25 } }}
+            variant='filled'
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={touched.password && Boolean(errors.password)}
+            helperText={touched.password && errors.password}
+          />
+
           <Grid container>
             <Link
               sx={{ ml: 'auto', mr: 0, color: 'primary.secondary' }}
