@@ -1,11 +1,13 @@
 import Paper from '@mui/material/Paper'
+import GeneralProfileData from '../../../../../components/GeneralProfileData'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
+import Avatar from '@mui/material/Avatar'
+import PersonalProfileData from '@/components/PersonalProfileData'
 import Stack from '@mui/material/Stack'
-import GeneralProfileEditable from '@/components/GeneralProfileEditable'
-import PersonalProfileEditable from '@/components/PersonalProfileEditable'
-import AcademicProfileEditable from '@/components/AcademicProfileEditable'
-import EditAvatar from '@/components/EditAvatar'
+import AcademicProfileData from '@/components/AcademicProfileData'
+import Link from 'next/link'
+import Button from '@mui/material/Button'
 
 const USER = 'profile.json'
 
@@ -23,9 +25,8 @@ const fetchUserData = async (USER) => {
   }
 }
 
-export default async function EditProfile() {
+export default async function Profile() {
   const {
-    picture,
     general: generalData,
     personal: personalData,
     school: schoolData
@@ -61,28 +62,36 @@ export default async function EditProfile() {
             <Box
               sx={{
                 width: {
-                  xs: 150,
+                  xs: 100,
                   md: 200
                 },
                 height: {
-                  xs: 150,
+                  xs: 100,
                   md: 200
                 }
               }}
             >
-              <EditAvatar alternText={generalData.name} imageSource={picture} />
+              <Avatar
+                alt={generalData.name}
+                src='/'
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  fontSize: '80px'
+                }}
+              />
             </Box>
           </Grid>
           <Grid item xs={12} md={7} lg={8}>
             <Stack rowGap={10}>
-              <GeneralProfileEditable generalData={generalData} />
-              <PersonalProfileEditable personalData={personalData} />
-              <AcademicProfileEditable schoolData={schoolData} />
+              <GeneralProfileData generalData={generalData} />
+              <PersonalProfileData personalData={personalData} />
+              <AcademicProfileData schoolData={schoolData} />
             </Stack>
           </Grid>
         </Grid>
       </Paper>
-      {/* <Link
+      <Link
         style={{
           position: 'fixed',
           right: 30,
@@ -93,7 +102,7 @@ export default async function EditProfile() {
         <Button variant='contained' aria-label='Editar datos'>
           Editar datos
         </Button>
-      </Link> */}
+      </Link>
     </Stack>
   )
 }

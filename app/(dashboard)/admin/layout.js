@@ -6,14 +6,14 @@ import MainContent from '@/components/MainContent'
 import { useState, useEffect } from 'react'
 import Navbar from '@/components/Navbar'
 import { DrawerHeader } from '@/components/SideBar'
-import ArticleIcon from '@mui/icons-material/Article'
+import EmailIcon from '@mui/icons-material/Email'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
-import HistoryIcon from '@mui/icons-material/History'
+import BarChartIcon from '@mui/icons-material/BarChart'
 import OtherHousesIcon from '@mui/icons-material/OtherHouses'
 import ListFooter from '@/components/ListFooter'
 import Link from 'next/link'
@@ -22,10 +22,11 @@ import SettingButtons from '@/components/SettingButton'
 import { usePathname } from 'next/navigation'
 
 const URL = {
-  Home: '/graduate/dashboard',
-  Profile: '/graduate/dashboard/profile',
-  Surveys: '/graduate/dashboard/surveys',
-  History: '/graduate/dashboard/history'
+  Home: '/admin/dashboard',
+  Profile: '/admin/dashboard/profile',
+  Analytics: '/admin/dashboard/analytics',
+  Mailbox: '/admin/dashboard/mailbox',
+  Surveys: '/admin/dashboard/surveys'
 }
 
 const navigation = [
@@ -40,14 +41,14 @@ const navigation = [
     href: URL.Profile
   },
   {
-    text: 'Encuestas',
-    icon: <ArticleIcon />,
-    href: URL.Surveys
+    text: 'Estadíst. y Análisis',
+    icon: <BarChartIcon />,
+    href: URL.Analytics
   },
   {
-    text: 'Historial',
-    icon: <HistoryIcon />,
-    href: URL.History
+    text: 'Buzón',
+    icon: <EmailIcon />,
+    href: URL.Mailbox
   }
 ]
 
@@ -120,7 +121,7 @@ export default function RootLayout({ children }) {
           ))}
         </List>
         <ListFooter>
-          <SettingButtons href='/graduate/dashboard/settings' />
+          <SettingButtons href='/dashboard/admin/settings' />
           <LogoutButton />
         </ListFooter>
       </SideBar>

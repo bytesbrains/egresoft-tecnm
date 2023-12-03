@@ -36,8 +36,8 @@ export default function LoginForm({ role }) {
     })
 
     if (responseNextAuth?.error) {
-      console.log(responseNextAuth.error.split(','))
-      setError(true)
+      console.log(responseNextAuth, 'aa')
+      setError(responseNextAuth.error)
       return
     }
 
@@ -112,7 +112,7 @@ export default function LoginForm({ role }) {
               variant='h6'
               sx={{ mt: '10px', fontWeight: 'bold', textAlign: 'center' }}
             >
-              Datos erroneos
+              {error}
             </Typography>
           )}
         </Form>
