@@ -194,7 +194,7 @@ export default function Mailbox() {
                 <div style={{ marginTop: 'auto', textAlign: 'left' }}>
                   <Link
                     style={{ color: 'white' }}
-                    href={`/graduate/dashboard/mailbox/${item.title}`}
+                    href={`/graduate/dashboard/surveys/${item.title}`}
                   >
                     <Button
                       color='secondary'
