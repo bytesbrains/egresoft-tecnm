@@ -5,8 +5,9 @@ import MuiAppBar from '@mui/material/AppBar'
 import IconButton from '@mui/material/IconButton'
 import { Toolbar, Typography } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
+import BackButton from './BackButton'
 
-const drawerWidth = 240
+const drawerWidth = 250
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open'
@@ -38,11 +39,11 @@ export default function Navbar({ open, handleDrawerOpen, children }) {
             xs: 'space-between',
             sm: 'flex-start'
           },
-          width: {
-            xs: '57%',
-            md: '100%'
+          flexDirection: {
+            xs: 'row-reverse',
+            md: 'row'
           },
-          pr: '0px'
+          px: '0px'
         }}
       >
         <IconButton
@@ -54,6 +55,7 @@ export default function Navbar({ open, handleDrawerOpen, children }) {
         >
           <MenuIcon />
         </IconButton>
+        <BackButton />
         <Typography
           sx={{
             textTransform: 'capitalize',
@@ -61,7 +63,7 @@ export default function Navbar({ open, handleDrawerOpen, children }) {
               textAlign: 'center'
             }
           }}
-          variant='h5'
+          variant='h6'
           noWrap
           component='h1'
         >
