@@ -7,13 +7,12 @@ import Avatar from '@mui/material/Avatar'
 import Stack from '@mui/material/Stack'
 import Link from 'next/link'
 import Button from '@mui/material/Button'
-import useGraduateData from '@/hooks/useGraduateData'
-import GraduateGeneralData from '@/components/GraduateGeneralData'
-import GraduateProfileData from '@/components/GraduateProfileData'
-import GraduateAcademicData from '@/components/GraduateAcademicData'
+import AdminGeneralData from '@/components/AdminGeneralData'
+import AdminProfileData from '@/components/AdminProfileData'
+import useAdminData from '@/hooks/useAdminData'
 
 export default function Profile() {
-  const { general, personal, academic } = useGraduateData()
+  const { general, personal } = useAdminData()
 
   return (
     <Stack position='relative'>
@@ -67,9 +66,8 @@ export default function Profile() {
           </Grid>
           <Grid item xs={12} md={7} lg={8}>
             <Stack rowGap={10}>
-              <GraduateGeneralData data={general} />
-              <GraduateProfileData data={personal} />
-              <GraduateAcademicData data={academic} />
+              <AdminGeneralData data={general} />
+              <AdminProfileData data={personal} />
             </Stack>
           </Grid>
         </Grid>
@@ -80,7 +78,7 @@ export default function Profile() {
           right: 30,
           bottom: 30
         }}
-        href='/graduate/dashboard/profile/edit'
+        href='/admin/dashboard/profile/edit'
       >
         <Button variant='contained' aria-label='Editar datos'>
           Editar datos

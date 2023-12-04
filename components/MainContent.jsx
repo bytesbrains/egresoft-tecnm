@@ -2,7 +2,7 @@
 
 import { styled } from '@mui/material/styles'
 
-const drawerWidth = 240
+const drawerWidth = 250
 
 const Main = styled('section', {
   shouldForwardProp: (prop) => prop !== 'open'
@@ -27,5 +27,9 @@ const Main = styled('section', {
 }))
 
 export default function MainContent({ open, children }) {
-  return <Main open={open}>{children}</Main>
+  return (
+    <Main sx={{ position: 'relative' }} open={open}>
+      {children}
+    </Main>
+  )
 }

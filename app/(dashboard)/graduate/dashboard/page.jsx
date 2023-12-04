@@ -1,9 +1,5 @@
+import WelcomeDashboard from '@/components/WelcomeDashboard'
 
-export default function GraduateDashboard({children}) {
-
-  return (
-    <p>
-      ola
-    </p>
-  )
+export default function Dashboard() {
+  return <WelcomeDashboard />
 }

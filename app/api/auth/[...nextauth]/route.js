@@ -27,16 +27,19 @@ const handler = NextAuth({
 
         const userToken = await token.json()
 
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/users/me/admin`, {
-          method: 'GET',
-          headers: { Authorization: `Bearer ${userToken.access_token}` }
-        })
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/me/admin`,
+          {
+            method: 'GET',
+            headers: { Authorization: `Bearer ${userToken.access_token}` }
+          }
+        )
 
         const user = await res.json()
 
-        if (!res.ok) throw user
+        if (!res.ok) throw new Error(user.detail)
 
-        return { ...user, ...userToken, role: 'admin' }
+        return { ...user, ...userToken }
       }
     }),
     CredentialsProvider({
@@ -63,21 +66,27 @@ const handler = NextAuth({
 
         const userToken = await token.json()
 
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/users/me/graduate`, {
-          method: 'GET',
-          headers: { Authorization: `Bearer ${userToken.access_token}` }
-        })
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/users/me/graduate`,
+          {
+            method: 'GET',
+            headers: { Authorization: `Bearer ${userToken.access_token}` }
+          }
+        )
 
         const user = await res.json()
+        if (!res.ok) throw new Error(user.detail)
 
-        if (!res.ok) throw user
-
-        return { ...user, ...userToken, role: 'graduate' }
+        console.log('pass')
+        return { ...user, ...userToken }
       }
     })
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, trigger, user, session }) {
+      if (trigger === 'update' && session?.id) {
+        return { ...token, ...session }
+      }
       return { ...token, ...user }
     },
     async session({ session, token }) {
