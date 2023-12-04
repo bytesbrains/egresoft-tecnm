@@ -19,11 +19,7 @@ export default function EditProfile() {
   const { general, personal, academic, schema, status, update } =
     useGraduateData()
   const [error, setError] = useState()
-
-  const initialValues = {
-    ...schema
-  }
-
+  
   const handleSubmit = async (values) => {
     console.log(values)
     await updateGraduate(general.id, values)

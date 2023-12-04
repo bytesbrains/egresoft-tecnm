@@ -14,7 +14,7 @@ import GraduateAcademicData from '@/components/GraduateAcademicData'
 
 export default function Profile() {
   const { general, personal, academic } = useGraduateData()
-
+  
   return (
     <Stack position='relative'>
       <Paper
