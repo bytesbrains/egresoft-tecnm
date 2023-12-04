@@ -5,8 +5,8 @@ import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import useAdminData from '@/hooks/useAdminData'
 import EditAvatar from '@/components/EditAvatar'
-import EditableAdminGeneralData from '@/components/EditableAdminGeneralData'
-import EditableAdminProfileData from '@/components/EditableAdminProfileData'
+import EditableGeneralData from '@/components/EditableAdminGeneralData'
+import EditableProfileData from '@/components/EditableAdminProfileData'
 import { useState } from 'react'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
@@ -72,7 +72,7 @@ export default function EditProfile() {
               width: '100%'
             }}
           >
-            <EditableAdminGeneralData>
+            <EditableGeneralData>
               <EditableTextField
                 name='nombre'
                 label='Nombre'
@@ -90,8 +90,8 @@ export default function EditProfile() {
                 defaultValue={general.cargo}
                 onChange={handleChange}
               />
-            </EditableAdminGeneralData>
-            <EditableAdminProfileData>
+            </EditableGeneralData>
+            <EditableProfileData>
               <EditableTextField
                 name='email'
                 label='Correo Institucional'
@@ -143,7 +143,7 @@ export default function EditProfile() {
                 defaultValue={personal.fecha_nacimiento}
                 onChange={handleChange}
               />
-            </EditableAdminProfileData>
+            </EditableProfileData>
             <Button
               type='submit'
               variant='contained'

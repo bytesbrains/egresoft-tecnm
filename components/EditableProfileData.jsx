@@ -1,7 +1,7 @@
 import Stack from '@mui/material/Stack'
 import ProfileSectionTitle from './ProfileSectionTitle'
 
-export default function EditableAdminProfileData({ children }) {
+export default function EditableProfileData({ children }) {
   return (
     <section>
       <ProfileSectionTitle>Datos Personales</ProfileSectionTitle>
