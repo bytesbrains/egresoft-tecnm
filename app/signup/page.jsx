@@ -56,9 +56,13 @@ export default function SignUp() {
               borderRadius: '10px'
             }}
           >
-            <div
-              style={{
+            <Box
+              sx={{
                 display: 'flex',
+                flexDirection: {
+                  xs: 'column',
+                  md: 'row'
+                },
                 gap: '25px',
                 justifyContent: 'space-between'
               }}
@@ -76,7 +80,10 @@ export default function SignUp() {
                 variant='filled'
                 onChange={handleChange}
                 sx={{
-                  minWidth: '200px'
+                  minWidth: {
+                    sx: 'auto',
+                    lg: '200px'
+                  }
                 }}
               />
               <TextField
@@ -91,7 +98,10 @@ export default function SignUp() {
                 variant='filled'
                 onChange={handleChange}
                 sx={{
-                  minWidth: '200px'
+                  minWidth: {
+                    sx: 'auto',
+                    lg: '200px'
+                  }
                 }}
               />
               <TextField
@@ -106,10 +116,13 @@ export default function SignUp() {
                 variant='filled'
                 onChange={handleChange}
                 sx={{
-                  minWidth: '200px'
+                  minWidth: {
+                    sx: 'auto',
+                    lg: '200px'
+                  }
                 }}
               />
-            </div>
+            </Box>
             <TextField
               margin='normal'
               required
