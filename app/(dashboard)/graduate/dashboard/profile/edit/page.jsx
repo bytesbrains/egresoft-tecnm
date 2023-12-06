@@ -181,7 +181,7 @@ export default function EditProfile() {
                 onChange={handleChange}
               />
               <EditableTextField
-                name='telfono.telefono_personal'
+                name='telefono.telefono_personal'
                 label='Telefono Personal'
                 type='text'
                 id='telefono.telefono_personal'
