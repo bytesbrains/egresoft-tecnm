@@ -47,7 +47,7 @@ export default function SignUp() {
             style={{
               display: 'flex',
               flexDirection: 'column',
-              minWidth: '500px',
+              minWidth: '330px',
               width: '60%',
               marginTop: '50px',
               gap: '20px',
