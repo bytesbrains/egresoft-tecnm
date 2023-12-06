@@ -1,48 +1,16 @@
 'use client'
 
-import { useState } from 'react'
-import { Formik, Form, Field } from 'formik'
+import { Formik, Form } from 'formik'
 import Typography from '@mui/material/Typography'
-import * as Yup from 'yup'
 import TextField from '@mui/material/TextField'
 import Link from '@mui/material/Link'
 import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
-import { useRouter } from 'next/navigation'
-import { signIn } from 'next-auth/react'
+import useLogin from '@/hooks/useLogin'
 
 export default function LoginForm({ role }) {
-  const router = useRouter()
-  const [error, setError] = useState()
-
-  const initialValues = {
-    username: '',
-    password: ''
-  }
-
-  const validationSchema = Yup.object({
-    username: Yup.string('Ingresa tu usuario').required(
-      'El usuario es requerido'
-    ),
-    password: Yup.string('Enter your password').required('Password is required')
-  })
-
-  const handleSubmit = async (values, { setSubmitting }) => {
-    setSubmitting(true)
-
-    const responseNextAuth = await signIn(role, {
-      ...values,
-      redirect: false
-    })
-
-    if (responseNextAuth?.error) {
-      console.log(responseNextAuth, 'aa')
-      setError(responseNextAuth.error)
-      return
-    }
-
-    router.push(`/${role}/dashboard`)
-  }
+  const { error, handleSubmit, initialValues, validationSchema } =
+    useLogin(role)
 
   return (
     <Formik

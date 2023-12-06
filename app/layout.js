@@ -2,7 +2,7 @@ import ThemeRegistry from '../utils/ThemeRegistry'
 import SessionAuthProvider from '../context/SessionAuthProvider'
 
 export const metadata = {
-  title: 'Egresoft',
+  title: 'Egresoft TecNM',
   description: 'graduate tracking'
 }
 
@@ -12,7 +12,7 @@ export default function RootLayout({ children }) {
       <body>
         <ThemeRegistry options={{ key: 'mui' }}>
           <SessionAuthProvider>
-            <main style={{height:'100vh'}}>{children}</main>
+            <main style={{ height: '100vh' }}>{children}</main>
           </SessionAuthProvider>
         </ThemeRegistry>
       </body>
