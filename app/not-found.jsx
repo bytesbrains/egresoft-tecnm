@@ -1,5 +1,5 @@
-import { Box, Button, Container, Typography } from '@mui/material';
-import Grid from '@mui/material/Grid';
+import { Box, Button, Container, Typography } from '@mui/material'
+import Grid from '@mui/material/Grid'
 import Link from 'next/link'
 
 export default function NotFound() {
@@ -12,28 +12,27 @@ export default function NotFound() {
         minHeight: '100vh'
       }}
     >
-      <Container maxWidth="md">
+      <Container maxWidth='md'>
         <Grid container spacing={2}>
           <Grid xs={6}>
-            <Typography variant="h1">
-              404
+            <Typography variant='h1'>404</Typography>
+            <Typography variant='h6'>
+              La pagina por la que estas buscando no existe.
             </Typography>
-            <Typography variant="h6">
-              The page you’re looking for doesn’t exist.
-            </Typography>
-              <Link href="/">
-              <Button variant="contained">Back Home</Button>
-              </Link>
+            <Link href='/'>
+              <Button variant='contained'>Regresar</Button>
+            </Link>
           </Grid>
           <Grid xs={6}>
             <img
-              src="https://cdn.pixabay.com/photo/2017/03/09/12/31/error-2129569__340.jpg"
-              alt=""
-              width={500} height={250}
+              src='https://cdn.pixabay.com/photo/2017/03/09/12/31/error-2129569__340.jpg'
+              alt=''
+              width={500}
+              height={250}
             />
           </Grid>
         </Grid>
       </Container>
     </Box>
-  );
+  )
 }

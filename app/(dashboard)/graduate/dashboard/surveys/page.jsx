@@ -195,16 +195,34 @@ export default function Mailbox() {
         sx={{
           display: {
             xs: 'none',
-            md: 'flex'
+            md: 'block'
           },
-          height: '70vh'
+          height: '83vh',
+          position: 'relative',
+          overflow: 'hidden'
         }}
       >
-        <img
-          style={{ width: '100%', justifySelf: 'flex-end' }}
-          src='/images/hero-dashboard.svg'
-          alt='Bienvenido a las encuestas'
-        />
+        <Box
+          sx={{
+            width: {
+              md: '300px',
+              lg: '500px',
+              xl: '700px'
+            },
+            position: 'absolute',
+            bottom: '10px',
+            right: '-230px'
+          }}
+        >
+          <img
+            style={{
+              width: '100%',
+              height: '100%'
+            }}
+            src='/images/hero-dashboard.svg'
+            alt='Bienvenido a las encuestas'
+          />
+        </Box>
       </Grid>
     </Grid>
   )
