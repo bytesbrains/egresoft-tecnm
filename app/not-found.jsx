@@ -1,8 +1,13 @@
+'use client'
+
 import { Box, Button, Container, Typography } from '@mui/material'
 import Grid from '@mui/material/Grid'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 export default function NotFound() {
+  const router = useRouter()
+
   return (
     <Box
       sx={{
@@ -20,7 +25,9 @@ export default function NotFound() {
               La pagina por la que estas buscando no existe.
             </Typography>
             <Link href='/'>
-              <Button variant='contained'>Regresar</Button>
+              <Button onClick={() => router.back()} variant='contained'>
+                Regresar
+              </Button>
             </Link>
           </Grid>
           <Grid xs={6}>
