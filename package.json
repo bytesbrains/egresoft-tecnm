@@ -25,7 +25,8 @@
     "react-dom": "^18",
     "survey-core": "^1.9.117",
     "survey-react-ui": "^1.9.117",
-    "yup": "^1.3.2"
+    "yup": "^1.3.2",
+    "zustand": "^4.4.7"
   },
   "devDependencies": {
     "eslint": "^8",
