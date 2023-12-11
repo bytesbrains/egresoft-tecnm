@@ -37,7 +37,7 @@ export default function Navbar({ open, handleDrawerOpen, children }) {
           alignItems: 'center',
           justifyContent: {
             xs: 'space-between',
-            sm: 'flex-start'
+            md: 'flex-start'
           },
           flexDirection: {
             xs: 'row-reverse',

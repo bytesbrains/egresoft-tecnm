@@ -30,7 +30,6 @@ const fetchSurveysList = async () => {
 export default function Mailbox() {
   const [isGrid, setIsGrid] = useState(false)
   const [data, setData] = useState([])
-  const [currentTab, setCurrentTab] = useState('Inicio')
 
   useEffect(() => {
     const getData = async () => setData(await fetchSurveysList())
@@ -45,15 +44,13 @@ export default function Mailbox() {
     setIsGrid(false)
   }
 
-  const handleTab = (event, newValue) => {
-    setCurrentTab(newValue)
-  }
-
   return (
     <Grid
       container
       spacing={3}
       sx={{
+        alignItems: 'flex-start',
+        justifyContent: 'start',
         pt: {
           md: '20px'
         }
@@ -62,198 +59,171 @@ export default function Mailbox() {
       <Grid
         item
         xs={12}
+        md={8}
         sx={{
-          display: {
-            md: 'none'
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'flex-end',
+          height: '40px'
+        }}
+      >
+        {/* <SortInput /> */}
+        <Box
+          sx={{
+            display: 'flex',
+            width: 'fit-content',
+            borderRadius: '3px',
+            border: '1px solid',
+            borderColor: 'rgba(0, 0, 0, 0.12)'
+          }}
+        >
+          <IconButton
+            sx={{
+              borderRadius: '3px',
+              backgroundColor: isGrid ? 'rgba(0, 0, 0, 0.12)' : 'transparent'
+            }}
+            aria-label='format grid'
+            onClick={handleGridClick}
+          >
+            <WindowIcon />
+          </IconButton>
+          <IconButton
+            sx={{
+              borderRadius: '3px',
+              backgroundColor: isGrid ? 'transparent' : 'rgba(0, 0, 0, 0.12)'
+            }}
+            aria-label='format column'
+            onClick={handleColumnClick}
+          >
+            <FormatAlignLeftIcon />
+          </IconButton>
+          <Divider orientation='vertical' flexItem />
+        </Box>
+      </Grid>
+
+      <Grid
+        item
+        xs={12}
+        md={8}
+        component='section'
+        sx={{
+          display: isGrid ? 'grid' : 'flex',
+          gap: '20px',
+          mt: '20px',
+          columnGap: isGrid ? '20px' : '0',
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+          gridTemplateColumns: {
+            xs: isGrid ? 'repeat(auto-fill, minmax(140px, 1fr))' : '1fr',
+            md: isGrid ? 'repeat(auto-fill, minmax(345px, 1fr))' : '1fr'
           }
         }}
       >
-        <MailboxTab currentTab={currentTab} handleTab={handleTab} />
-      </Grid>
-      {currentTab === 'Inicio' ? (
-        <>
-          <Grid
-            item
-            xs={12}
-            md={8}
+        {data.map((item) => (
+          <Paper
+            elevation={1}
+            key={item.title}
             sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              height: '40px'
-            }}
-          >
-            <SortInput />
-            <Box
-              sx={{
-                display: 'flex',
-                width: 'fit-content',
-                borderRadius: '3px',
-                border: '1px solid',
-                borderColor: 'rgba(0, 0, 0, 0.12)'
-              }}
-            >
-              <IconButton
-                sx={{
-                  borderRadius: '3px',
-                  backgroundColor: isGrid
-                    ? 'rgba(0, 0, 0, 0.12)'
-                    : 'transparent'
-                }}
-                aria-label='format grid'
-                onClick={handleGridClick}
-              >
-                <WindowIcon />
-              </IconButton>
-              <IconButton
-                sx={{
-                  borderRadius: '3px',
-                  backgroundColor: isGrid
-                    ? 'transparent'
-                    : 'rgba(0, 0, 0, 0.12)'
-                }}
-                aria-label='format column'
-                onClick={handleColumnClick}
-              >
-                <FormatAlignLeftIcon />
-              </IconButton>
-              <Divider orientation='vertical' flexItem />
-            </Box>
-          </Grid>
-
-          <Grid
-            item
-            xs={12}
-            md={8}
-            component='section'
-            sx={{
-              display: isGrid ? 'grid' : 'flex',
-              gap: '20px',
-              mt: '20px',
-              columnGap: isGrid ? '20px' : '0',
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-              gridTemplateColumns: {
-                xs: isGrid ? 'repeat(auto-fill, minmax(140px, 1fr))' : '1fr',
-                md: isGrid ? 'repeat(auto-fill, minmax(345px, 1fr))' : '1fr'
+              minWidth: isGrid ? '130px' : '100%',
+              height: 'fit-content',
+              padding: {
+                xs: '8px',
+                md: '16px'
               }
             }}
           >
-            {data.map((item) => (
-              <Paper
-                elevation={1}
-                key={item.title}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                marginBottom: '16px',
+                padding: '8px'
+              }}
+            >
+              <IconButton
+                sx={{ width: '32px', height: '32px', padding: '0px' }}
+              >
+                <AccountCircleIcon sx={{ width: '32px', height: '32px' }} />
+              </IconButton>
+              <Typography
+                variant='h6'
+                style={{ marginLeft: '8px', fontSize: '16px' }}
+              >
+                {item.title}
+              </Typography>
+              <div style={{ flex: 1 }}></div>
+            </div>
+            <div style={{ marginBottom: '16px' }}>
+              <Typography
+                variant='body1'
                 sx={{
-                  minWidth: isGrid ? '130px' : '100%',
-                  height: 'fit-content',
-                  padding: {
-                    xs: '8px',
+                  color: 'gray',
+                  display: {
+                    xs: 'none',
+                    md: 'block'
+                  },
+                  fontSize: {
+                    xs: '13px',
                     md: '16px'
                   }
                 }}
               >
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    marginBottom: '16px',
-                    padding: '8px'
+                {item.description}
+              </Typography>
+            </div>
+            <div style={{ marginTop: 'auto', textAlign: 'left' }}>
+              <Link
+                style={{ color: 'white' }}
+                href={`/graduate/dashboard/surveys/${item.title}`}
+              >
+                <Button
+                  color='secondary'
+                  sx={{
+                    backgroundColor: 'rgba(214, 235, 255, 0.3)'
                   }}
                 >
-                  <IconButton
-                    sx={{ width: '32px', height: '32px', padding: '0px' }}
-                  >
-                    <AccountCircleIcon sx={{ width: '32px', height: '32px' }} />
-                  </IconButton>
-                  <Typography
-                    variant='h6'
-                    style={{ marginLeft: '8px', fontSize: '16px' }}
-                  >
-                    {item.title}
-                  </Typography>
-                  <div style={{ flex: 1 }}></div>
-                </div>
-                <div style={{ marginBottom: '16px' }}>
-                  <Typography
-                    variant='body1'
-                    sx={{
-                      color: 'gray',
-                      display: {
-                        xs: 'none',
-                        md: 'block'
-                      },
-                      fontSize: {
-                        xs: '13px',
-                        md: '16px'
-                      }
-                    }}
-                  >
-                    {item.description}
-                  </Typography>
-                </div>
-                <div style={{ marginTop: 'auto', textAlign: 'left' }}>
-                  <Link
-                    style={{ color: 'white' }}
-                    href={`/graduate/dashboard/surveys/${item.title}`}
-                  >
-                    <Button
-                      color='secondary'
-                      sx={{
-                        backgroundColor: 'rgba(214, 235, 255, 0.3)'
-                      }}
-                    >
-                      Iniciar
-                    </Button>
-                  </Link>
-                </div>
-              </Paper>
-            ))}
-          </Grid>
-          <Grid
-            item
-            md={4}
-            sx={{
-              width: '300px',
-              display: {
-                xs: 'none',
-                md: 'block'
-              }
+                  Iniciar
+                </Button>
+              </Link>
+            </div>
+          </Paper>
+        ))}
+      </Grid>
+      <Grid
+        item
+        md={4}
+        sx={{
+          display: {
+            xs: 'none',
+            md: 'block'
+          },
+          height: '83vh',
+          position: 'relative',
+          overflow: 'hidden'
+        }}
+      >
+        <Box
+          sx={{
+            width: {
+              md: '300px',
+              lg: '500px',
+              xl: '700px'
+            },
+            position: 'absolute',
+            bottom: '10px',
+            right: '-230px'
+          }}
+        >
+          <img
+            style={{
+              width: '100%',
+              height: '100%'
             }}
-          >
-            <Link href='https://www.occ.com.mx/'>
-              <img
-                style={{ width: '100%' }}
-                src='/images/InfografiaUniversidades.jpg'
-                alt='bolsa de trabajo'
-              />
-            </Link>
-            <Link href='https://www.occ.com.mx/'>
-              <img
-                style={{ width: '100%' }}
-                src='/images/sne-bolsa-de-trabajo.jpg'
-                alt='bolsa de trabajo'
-              />
-            </Link>
-          </Grid>
-        </>
-      ) : (
-        <Grid item xs={12} md={4} sx={{ width: '300px' }}>
-          <Link href='https://www.occ.com.mx/'>
-            <img
-              style={{ width: '100%' }}
-              src='/images/InfografiaUniversidades.jpg'
-              alt='bolsa de trabajo'
-            />
-          </Link>
-          <Link href='https://www.occ.com.mx/'>
-            <img
-              style={{ width: '100%' }}
-              src='/images/sne-bolsa-de-trabajo.jpg'
-              alt='bolsa de trabajo'
-            />
-          </Link>
-        </Grid>
-      )}
+            src='/images/hero-dashboard.svg'
+            alt='Bienvenido a las encuestas'
+          />
+        </Box>
+      </Grid>
     </Grid>
   )
 }
