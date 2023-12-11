@@ -2,8 +2,8 @@ import ThemeRegistry from '../utils/ThemeRegistry'
 import SessionAuthProvider from '../context/SessionAuthProvider'
 
 export const metadata = {
-  title: 'Egresoft TecNM',
-  description: 'graduate tracking'
+  title: 'Egresoft TecNM - Seguimiento de egresados',
+  description: 'Seguimiento de egresados'
 }
 
 export default function RootLayout({ children }) {
