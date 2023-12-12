@@ -19,7 +19,7 @@ export default function GraduateLogin() {
       <LoginForm role={ROLE} />
       <Link
         sx={{ ml: 'auto', mr: 0, color: 'primary.secondary' }}
-        href='/signup'
+        href='/signup/graduate'
         variant='body2'
       >
         ¿No tienes una cuenta? Regístrate aqui
