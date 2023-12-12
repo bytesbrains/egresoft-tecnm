@@ -13,11 +13,11 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <Grid container sx={{height:'100%'}}>
+    <Grid container sx={{ height: '100%' }}>
       <Grid
         item
         xs={false}
-        sm={6}
+        sm={false}
         md={6}
         sx={{
           backgroundImage: 'url(/images/TecNM.svg)',
@@ -30,7 +30,7 @@ export default function RootLayout({ children }) {
       <Grid
         item
         xs={12}
-        sm={6}
+        sm={12}
         md={6}
         component={Paper}
         elevation={6}
@@ -40,8 +40,8 @@ export default function RootLayout({ children }) {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: {
-            xs:'start',
-            md:'center'
+            xs: 'start',
+            md: 'center'
           }
         }}
       >
@@ -51,22 +51,26 @@ export default function RootLayout({ children }) {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            width:{
-              xs:'90%',
-              md:'70%'
+            width: {
+              xs: '90%',
+              md: '70%'
             }
           }}
         >
-          <Box sx={{display:{
-            xs:'initial',
-            md:'none'
-          }}}>
-          <Image
-            src='/images/tecnmMobile.svg'
-            alt='Tecnologico nacional de mexico'
-            width={150}
-            height={150}
-          />
+          <Box
+            sx={{
+              display: {
+                xs: 'initial',
+                md: 'none'
+              }
+            }}
+          >
+            <Image
+              src='/images/tecnmMobile.svg'
+              alt='Tecnologico nacional de mexico'
+              width={150}
+              height={150}
+            />
           </Box>
 
           <Typography

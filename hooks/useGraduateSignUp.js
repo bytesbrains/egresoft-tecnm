@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { signIn } from 'next-auth/react'
 import * as Yup from 'yup'
 import { createGraduate } from '@/services/graduate.api'
 
@@ -65,25 +63,25 @@ const initialValues = {
 const schoolEmail = '@minatitlan.tecnm.mx'
 
 export default function useGraduateSignUp() {
-  const router = useRouter()
   const [error, setError] = useState()
   const currentYear = new Date().getFullYear()
+  const [openModal, setOpenModal] = useState(false)
 
   const validationSchema = Yup.object({
     egresado_data: Yup.object({
       nombre: Yup.object({
         nombre: Yup.string()
-          .matches(/^[A-Za-z]+$/, 'El nombre solo puede contener letras')
+          .matches(/^[A-Za-z\s]+$/, 'El nombre solo puede contener letras')
           .required('El nombre es requerido'),
         apellido_paterno: Yup.string()
           .matches(
-            /^[A-Za-z]+$/,
+            /^[A-Za-z\s]+$/,
             'El apellido paterno solo puede contener letras'
           )
           .required('El apellido paterno es requerido'),
         apellido_materno: Yup.string()
           .matches(
-            /^[A-Za-z]+$/,
+            /^[A-Za-z\s]+$/,
             'El apellido materno solo puede contener letras'
           )
           .required('El apellido materno es requerido')
@@ -108,7 +106,12 @@ export default function useGraduateSignUp() {
         .integer('La edad debe ser un número entero')
         .required('La edad es requerida'),
       curp: Yup.string()
+        .matches(
+          /^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/,
+          'La CURP debe contener 18 caracteres'
+        )
         .length(18, 'La CURP debe tener 18 caracteres')
+        .uppercase('La CURP debe estar en mayúsculas')
         .required('La CURP es requerida'),
       sexo: Yup.string().required('El sexo es requerido'),
       modalidad: Yup.string().required('La modalidad es requerida'),
@@ -148,7 +151,7 @@ export default function useGraduateSignUp() {
     })
   })
 
-  const handleSubmit = async (values, { setSubmitting }) => {
+  const handleSubmit = async (values) => {
     console.log(values)
     const {
       egresado_data: { periodo_egreso, year, ...restEgresado },
@@ -158,10 +161,6 @@ export default function useGraduateSignUp() {
     const newPeriodoEgreso = `${periodo_egreso} ${year}`
     const newSchoolEmail = `${email}${schoolEmail}`
 
-    // const newValues = {
-    //   ...values,
-    //   ...values.egresado_data.periodo
-    // }
     const parsedValues = {
       egresado_data: { ...restEgresado, periodo_egreso: newPeriodoEgreso },
       user: { ...restUser, email: newSchoolEmail }
@@ -169,13 +168,12 @@ export default function useGraduateSignUp() {
 
     console.log(parsedValues)
 
-    const data = await createGraduate(parsedValues)
-    const response = await data.json()
+    // const data = await createGraduate(parsedValues)
+    // const response = await data.json()
 
-    console.log(response)
+    // console.log(response)
 
-    // setSubmitting(true)
-    // router.push(`/login/graduate`)
+    setOpenModal(true)
   }
 
   return {
@@ -184,6 +182,7 @@ export default function useGraduateSignUp() {
     validationSchema,
     handleSubmit,
     ESPECIALIDADES,
-    CARRERAS
+    CARRERAS,
+    openModal
   }
 }
