@@ -16,13 +16,13 @@ export default function AdminLogin() {
         Ingresando como Administrativo:
       </Typography>
       <LoginForm role={ROLE} />
-      <Link
+      {/* <Link
         sx={{ ml: 'auto', mr: 0, color: 'primary.secondary' }}
         href='/signup/graduate'
         variant='body2'
       >
         ¿No tienes una cuenta? Regístrate aqui
-      </Link>
+      </Link> */}
     </>
   )
 }
