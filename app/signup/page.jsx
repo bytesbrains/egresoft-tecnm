@@ -11,6 +11,7 @@ import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 import Button from '@mui/material/Button'
 import { useMediaQuery } from '@mui/material'
+import SignUpModal from '@/components/SignUpModal'
 
 export default function SignUp() {
   const {
@@ -18,10 +19,12 @@ export default function SignUp() {
     handleSubmit,
     validationSchema,
     CARRERAS,
-    ESPECIALIDADES
+    ESPECIALIDADES,
+    openModal
   } = useGraduateSignUp()
   const inputProps = { inputProps: { style: { fontSize: 20 } } }
   const isSmallScreen = useMediaQuery('(max-width:600px)')
+
   return (
     <Box
       sx={{
@@ -42,7 +45,8 @@ export default function SignUp() {
         sx={{
           mb: '30px',
           fontSize: {
-            xs: '40px',
+            xs: '35px',
+            sm: '40px',
             md: '50px',
             lg: '60px',
             xl: '100px'
@@ -62,7 +66,8 @@ export default function SignUp() {
           color: '#f2f2f2',
           fontSize: {
             xs: '22px',
-            md: '30px'
+            sm: '30px',
+            md: '35px'
           }
         }}
       >
@@ -334,7 +339,10 @@ export default function SignUp() {
                     ...inputProps.inputProps
                   }}
                   variant='filled'
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    setFieldValue('egresado_data.curp', e.target.value)
+                    setFieldTouched('egresado_data.curp', true, false)
+                  }}
                   error={
                     touched.egresado_data?.curp && !!errors.egresado_data?.curp
                   }
@@ -551,6 +559,7 @@ export default function SignUp() {
           </Form>
         )}
       </Formik>
+      <SignUpModal open={openModal} />
     </Box>
   )
 }
