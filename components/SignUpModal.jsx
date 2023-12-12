@@ -58,7 +58,7 @@ export default function SignUpModal({ open }) {
           <Typography id='modal-modal-description' sx={{ my: 2 }}>
             Su usuario fue creado con exito.
           </Typography>
-          <Link href='/login/'>
+          <Link href='/login/graduate'>
             <Button variant='contained'>Iniciar sesión</Button>
           </Link>
           {open && !confettiFired && typeof window !== 'undefined' && (
