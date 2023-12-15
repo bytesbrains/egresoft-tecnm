@@ -11,7 +11,7 @@ export default function Surveys({ isGrid }) {
   return surveys?.map((item) => (
     <Paper
       elevation={1}
-      key={item.title}
+      key={item.surveyId + item.title}
       sx={{
         minWidth: isGrid ? '130px' : '100%',
         height: 'fit-content',
@@ -61,7 +61,7 @@ export default function Surveys({ isGrid }) {
       <div style={{ marginTop: 'auto', textAlign: 'left' }}>
         <Link
           style={{ color: 'white' }}
-          href={`/graduate/dashboard/surveys/${item.title}`}
+          href={`/graduate/dashboard/surveys/${item.surveyId}`}
         >
           <Button
             color='secondary'

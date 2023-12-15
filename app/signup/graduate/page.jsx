@@ -360,23 +360,6 @@ export default function SignUp() {
                   </Select>
                 </FormControl>
                 <FormControl>
-                  <InputLabel required id='modalidad-label'>
-                    Modalidad
-                  </InputLabel>
-                  <Select
-                    required
-                    labelId='modalidad-label'
-                    id='egresado_data.modalidad'
-                    name='egresado_data.modalidad'
-                    label='Modalidad'
-                    defaultValue=''
-                    onChange={handleChange}
-                  >
-                    <MenuItem value='Presencial'>Presencial</MenuItem>
-                    <MenuItem value='Virtual'>Virtual</MenuItem>
-                  </Select>
-                </FormControl>
-                <FormControl>
                   <InputLabel required id='carrera-label'>
                     Carrera
                   </InputLabel>
@@ -394,6 +377,23 @@ export default function SignUp() {
                         {carrera}
                       </MenuItem>
                     ))}
+                  </Select>
+                </FormControl>
+                <FormControl>
+                  <InputLabel required id='modalidad-label'>
+                    Modalidad
+                  </InputLabel>
+                  <Select
+                    required
+                    labelId='modalidad-label'
+                    id='egresado_data.modalidad'
+                    name='egresado_data.modalidad'
+                    label='Modalidad'
+                    defaultValue=''
+                    onChange={handleChange}
+                  >
+                    <MenuItem value='Presencial'>Presencial</MenuItem>
+                    <MenuItem value='Virtual'>Virtual</MenuItem>
                   </Select>
                 </FormControl>
                 <FormControl>

@@ -19,7 +19,7 @@ import ListFooter from '@/components/ListFooter'
 import Link from 'next/link'
 import LogoutButton from '@/components/LogoutButton'
 import SettingButtons from '@/components/SettingButton'
-import { usePathname } from 'next/navigation'
+import { usePage } from '@/store/usePage'
 
 const URL = {
   Home: '/graduate/dashboard',
@@ -53,10 +53,7 @@ const navigation = [
 
 export default function RootLayout({ children }) {
   const [open, setOpen] = useState()
-  const pathname = usePathname()
-  const pagename = decodeURIComponent(pathname).split('/').filter(Boolean)
-  const currentPage = pagename.pop()
-  const [currentTab, setCurrentTab] = useState(0)
+  const { currentPage, setCurrentPage, currentTab, setCurrentTab } = usePage()
 
   useEffect(() => {
     const viewport = window.innerWidth > 600
@@ -81,7 +78,7 @@ export default function RootLayout({ children }) {
       component='section'
     >
       <Navbar open={open} handleDrawerOpen={handleDrawerOpen}>
-        {currentPage.toLowerCase()}
+        {currentPage}
       </Navbar>
       <SideBar open={open} handleDrawerClose={handleDrawerClose}>
         <List>
@@ -92,7 +89,10 @@ export default function RootLayout({ children }) {
                 textDecoration: 'none',
                 color: '#fff'
               }}
-              onClick={() => handleCurrentTab(index)}
+              onClick={() => {
+                handleCurrentTab(index)
+                setCurrentPage(item.text)
+              }}
               href={item.href}
             >
               <ListItem disablePadding>

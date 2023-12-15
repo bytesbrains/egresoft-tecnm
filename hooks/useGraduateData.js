@@ -1,4 +1,11 @@
 import { useSession } from 'next-auth/react'
+import {
+  CARRERAS,
+  ESPECIALIDADES,
+  SCHEMA,
+  schoolEmail,
+  validationSchema
+} from '@/utils/validationSchemas/graduateValidationSchema'
 
 export default function useGraduateData() {
   const { data: session, status, update } = useSession()
@@ -11,7 +18,6 @@ export default function useGraduateData() {
     id_carrera,
     modalidad,
     periodo_egreso,
-    cargo,
     curp,
     telefono,
     correo,
@@ -25,14 +31,16 @@ export default function useGraduateData() {
     id_carrera: '',
     modalidad: '',
     periodo_egreso: '',
-    cargo: '',
     curp: '',
     telefono: {},
     correo: {},
     direccion: {}
   }
 
+  const [newPeriodoEgreso, egreso_year] = periodo_egreso.split(' ')
+
   return {
+    userId: id,
     general: {
       id,
       ...nombre,
@@ -49,7 +57,8 @@ export default function useGraduateData() {
     },
     academic: {
       email,
-      periodo_egreso
+      egreso_year,
+      periodo_egreso: newPeriodoEgreso
     },
     session,
     schema: {
@@ -60,14 +69,15 @@ export default function useGraduateData() {
       edad,
       id_carrera,
       modalidad,
-      periodo_egreso,
-      cargo,
+      periodo_egreso: newPeriodoEgreso,
+      egreso_year,
       curp,
       telefono,
       correo,
       direccion
     },
     status,
-    update
+    update,
+    CARRERAS
   }
 }
