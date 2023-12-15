@@ -52,8 +52,18 @@ const navigation = [
 ]
 
 export default function RootLayout({ children }) {
-  const [open, setOpen] = useState()
-  const { currentPage, setCurrentPage, currentTab, setCurrentTab } = usePage()
+  const [open, setOpen] = useState(false)
+  const isWindowDefined = typeof window !== 'undefined'
+  const initialTab = isWindowDefined ? localStorage.getItem('currentTab') : null
+  const [currentTab, setCurrentTab] = useState(
+    initialTab ? parseInt(initialTab) : 0
+  )
+
+  useEffect(() => {
+    if (isWindowDefined) {
+      localStorage.setItem('currentTab', currentTab.toString()) // Almacenar como string
+    }
+  }, [currentTab, isWindowDefined])
 
   useEffect(() => {
     const viewport = window.innerWidth > 600
@@ -78,7 +88,7 @@ export default function RootLayout({ children }) {
       component='section'
     >
       <Navbar open={open} handleDrawerOpen={handleDrawerOpen}>
-        {currentPage}
+        Dashboard
       </Navbar>
       <SideBar open={open} handleDrawerClose={handleDrawerClose}>
         <List>
@@ -91,7 +101,7 @@ export default function RootLayout({ children }) {
               }}
               onClick={() => {
                 handleCurrentTab(index)
-                setCurrentPage(item.text)
+                // setCurrentPage(item.text)
               }}
               href={item.href}
             >
@@ -102,7 +112,7 @@ export default function RootLayout({ children }) {
                     alignItems: 'center',
                     gap: '10px',
                     justifyContent: 'center',
-                    backgroundColor: currentTab == index && '#005275',
+                    backgroundColor: currentTab === index && '#005275',
                     '&:hover': {
                       backgroundColor: 'rgba(255, 255, 255, 0.10)'
                     }

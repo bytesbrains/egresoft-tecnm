@@ -24,7 +24,6 @@ export default function EditProfile() {
   const initialValues = {
     ...schema
   }
-  useCurrentPage('Editar Perfil')
 
   const handleSubmit = async (values, { setSubmitting }) => {
     const { egreso_year, periodo_egreso, ...restValues } = { ...values }
