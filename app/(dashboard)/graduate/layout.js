@@ -19,7 +19,7 @@ import ListFooter from '@/components/ListFooter'
 import Link from 'next/link'
 import LogoutButton from '@/components/LogoutButton'
 import SettingButtons from '@/components/SettingButton'
-import { usePathname } from 'next/navigation'
+import { usePage } from '@/store/usePage'
 
 const URL = {
   Home: '/graduate/dashboard',
@@ -52,11 +52,18 @@ const navigation = [
 ]
 
 export default function RootLayout({ children }) {
-  const [open, setOpen] = useState()
-  const pathname = usePathname()
-  const pagename = decodeURIComponent(pathname).split('/').filter(Boolean)
-  const currentPage = pagename.pop()
-  const [currentTab, setCurrentTab] = useState(0)
+  const [open, setOpen] = useState(false)
+  const isWindowDefined = typeof window !== 'undefined'
+  const initialTab = isWindowDefined ? localStorage.getItem('currentTab') : null
+  const [currentTab, setCurrentTab] = useState(
+    initialTab ? parseInt(initialTab) : 0
+  )
+
+  useEffect(() => {
+    if (isWindowDefined) {
+      localStorage.setItem('currentTab', currentTab.toString()) // Almacenar como string
+    }
+  }, [currentTab, isWindowDefined])
 
   useEffect(() => {
     const viewport = window.innerWidth > 600
@@ -81,7 +88,7 @@ export default function RootLayout({ children }) {
       component='section'
     >
       <Navbar open={open} handleDrawerOpen={handleDrawerOpen}>
-        {currentPage.toLowerCase()}
+        Dashboard
       </Navbar>
       <SideBar open={open} handleDrawerClose={handleDrawerClose}>
         <List>
@@ -92,7 +99,10 @@ export default function RootLayout({ children }) {
                 textDecoration: 'none',
                 color: '#fff'
               }}
-              onClick={() => handleCurrentTab(index)}
+              onClick={() => {
+                handleCurrentTab(index)
+                // setCurrentPage(item.text)
+              }}
               href={item.href}
             >
               <ListItem disablePadding>
@@ -102,7 +112,7 @@ export default function RootLayout({ children }) {
                     alignItems: 'center',
                     gap: '10px',
                     justifyContent: 'center',
-                    backgroundColor: currentTab == index && '#005275',
+                    backgroundColor: currentTab === index && '#005275',
                     '&:hover': {
                       backgroundColor: 'rgba(255, 255, 255, 0.10)'
                     }

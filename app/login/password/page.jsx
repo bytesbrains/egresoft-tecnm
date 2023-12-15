@@ -1,5 +1,7 @@
-import PasswordForm from '@/components/PasswordForm';
-import Typography from '@mui/material/Typography';
+'use client'
+
+import PasswordForm from '@/components/PasswordForm'
+import Typography from '@mui/material/Typography'
 
 export default function RecoverPassword() {
   return (
@@ -10,7 +12,7 @@ export default function RecoverPassword() {
       <Typography variant='body1' textAlign='center' mb='20px'>
         Por favor, ingresa tu correo electrónico para reestablecer tu contraseña
       </Typography>
-      <PasswordForm/>
+      <PasswordForm />
     </>
   )
 }
